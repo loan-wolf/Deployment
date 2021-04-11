@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 const routes = require("./routes")
 const bodyParser = require('body-parser');
 var app = express();
-app.use(express.static(process.cwd()+"/loanwolfui/dist/loanwolfui/"));
+app.use(express.static(process.cwd()+"/UI/dist/loanwolfui/"));
 app.use(function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header('Access-Control-Allow-Methods', 'DELETE, PUT, POST, GET');
@@ -16,7 +16,7 @@ app.use(function(req, res, next) {
 	 }});
 
 app.get('/', (req,res) => {
-		res.sendFile(process.cwd()+"/loanwolfui/dist/loanwolfui/index.html")
+		res.sendFile(process.cwd()+"/UI/dist/loanwolfui/index.html")
 });
 
 
