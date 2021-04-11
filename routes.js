@@ -4,6 +4,7 @@ const Lender = require("./models/Lender")
 const sha3 = require('crypto-js/sha3');
 const { MerkleTree } = require('merkletreejs')
 const router = express.Router()
+const BN = require('bn.js');
 
 // Add a Client Identifying Info
 // Merkle root generated after info is obtained
@@ -35,7 +36,7 @@ router.post("/applyloan", async (req, res) => {
         monthlyspending: req.body.monthlyspending,
         paymentcontractaddress: req.body.paymentcontractaddress,
         erc20address: req.body.erc20address,
-        isapproved: false,
+        isapproved: "initiated",
         installmentinterval : 30,
         installments: req.body.duration, 
         accruedinterest: 0
@@ -58,13 +59,15 @@ function buildTree(jsonInput){
     const leaves = (Object.entries(jsonInput).map(x => sha3(x.toString(),{ outputLength: 256 })))
 
     const tree = new MerkleTree(leaves, (x) => sha3(x, { outputLength: 256 } ));
-    const root = tree.bufferToHex(tree.getRoot());
+
+    const root = new BN(tree.getRoot().toString('hex'), 16).toString();
     const hexLayers = tree.getHexLayers()
     const hexLeaves = tree.getHexLeaves()
     tree.leaves = hexLeaves
     tree.layers = hexLayers
     return {tree: tree, root: root};
 }
+
 
 // Get all Loans associated with an erc20Address
 router.put("/getproof", async (req, res) => {
@@ -113,21 +116,29 @@ router.get("/getloans/:erc20address", async (req, res) => {
     console.log("This is req",req)
 	const posts = await Loan.find({erc20address: req.params.erc20address})
     // .select({"loanid":0})
-    .select({"_id":0, "loanid":1, "loanamount":1, "duration":1, "collateraltoken":1, "collateralamount":1})
+    .select({"_id":0, "loanid":1, "isapproved":1,"loanamount":1, "duration":1, "collateraltoken":1, "collateralamount":1})
 	res.send(posts)
+})
+
+// update loan status
+router.put("/updateloan", async (req, res) => {
+    const loan = await Loan.findOne({ loanid: req.body.loanid })
+    loan.isapproved = req.body.isapproved 
+    await loan.save()
+	res.send(loan)
 })
 
 // Get all Loans detail
 router.get("/getloansdetails/:loanid", async (req, res) => {
 	const posts = await Loan.find({_id: req.params.loanid})
     // .select({"loanid":0})
-    .select({"_id":0, "loanid":1, "loanamount":1, "duration":1, "collateraltoken":1, "collateralamount":1, "installmentinterval": 1, "installments": 1, "merkleroot": 1})
+    .select({"_id":0, "loanid":1, "isapproved": 1, "loanamount":1, "duration":1, "collateraltoken":1, "collateralamount":1, "installmentinterval": 1, "installments": 1, "merkleroot": 1})
 	res.send(posts[0])
 })
 
 router.get("/getloanunapproved", async (req, res) => {
-	const posts = await Loan.find({isapproved: false})
-    .select({"_id":0, "loanid":1, "loanamount":1, "duration":1, "collateraltoken":1, "collateralamount":1})
+	const posts = await Loan.find({isapproved: "initiated"})
+    .select({"_id":0, "loanid":1, "isapproved": 1, "loanamount":1, "duration":1, "collateraltoken":1, "collateralamount":1})
 	res.send(posts)
 })
 
@@ -148,9 +159,6 @@ router.post("/buyloan", async (req, res) => {
             loans: [req.body.loanid],
           })
     }
-    const loan = await Loan.findOne({ loanid: req.body.loanid })
-    loan.isapproved = true
-    await loan.save()
     try {
         await post.save()
     } catch (err) {
@@ -165,7 +173,7 @@ router.get("/getlendedloans/:erc20address", async (req, res) => {
 
     for( var i = 0; i < post.loans.length; i++){ 
         const loan = await Loan.findOne({ loanid: post.loans[i] })
-        .select({"_id":0, "loanid":1, "loanamount":1, "duration":1, "collateraltoken":1, "collateralamount":1, "accruedinterest": 1})
+        .select({"_id":0, "loanid":1, "isapproved": 1, "loanamount":1, "duration":1, "collateraltoken":1, "collateralamount":1, "accruedinterest": 1})
         lendedLoans.push(loan)
     }
 	res.send(lendedLoans)
@@ -175,8 +183,8 @@ router.get("/getlendedloans/:erc20address", async (req, res) => {
 router.get("/getlendeddetails/:loanid", async (req, res) => {
 	const posts = await Loan.find({_id: req.params.loanid})
     // .select({"loanid":0})
-    .select({"_id":0, "loanid":1, "loanamount":1, "duration":1, "collateraltoken":1, "collateralamount":1, "installmentinterval": 1, "installments": 1, "accruedinterest": 1})
-	res.send(posts)
+    .select({"_id":0, "loanid":1, "isapproved": 1, "loanamount":1, "duration":1, "collateraltoken":1, "collateralamount":1, "installmentinterval": 1, "installments": 1, "accruedinterest": 1})
+	res.send(posts[0])
 })
 
 
