@@ -38,3 +38,30 @@ This endpoint will register a borrower's intent to apply for a loan and only rel
 
 Given the erc20address, this endpoint will query the database of all loans that were lent to payment address.
 
+
+# About this Repo
+
+This repo contains both the backend server and the Angular application (under the UI folder).
+3 lines were added the app.js file to automatically route the angular app:
+`app.use(express.static(process.cwd()+"/UI/dist/loanwolfui/"));`
+
+`app.get('/', (req,res) => {
+		res.sendFile(process.cwd()+"/UI/dist/loanwolfui/index.html")
+});`
+
+`app.get('/home', (req,res) => {
+	res.sendFile(process.cwd()+"/UI/dist/loanwolfui/index.html")
+});`
+
+To run the repo, cd to the directory of the UI and do 
+        `npm i`
+        `npm run build`
+
+then go back to the main directory and do:
+        `npm i`
+        `npm start`
+
+Now go to your webrowser to `locahost:5000`
+  
+  
+ 
