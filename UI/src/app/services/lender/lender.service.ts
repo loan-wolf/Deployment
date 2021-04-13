@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class LenderService {
 
-  baseUrl = 'http://localhost:5000/api/';
+  baseUrl = 'http://40.121.211.35:5000/api/';
   constructor(private http: HttpClient) {
 
   }

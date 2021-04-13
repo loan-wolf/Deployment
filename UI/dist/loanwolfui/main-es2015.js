@@ -2601,7 +2601,7 @@ __webpack_require__.r(__webpack_exports__);
 class BorrowService {
     constructor(http) {
         this.http = http;
-        this.baseUrl = 'http://localhost:5000/api/';
+        this.baseUrl = 'http://40.121.211.35:5000/api/';
     }
     createLoan(_data) {
         return this.http.post(this.baseUrl + 'applyloan', _data).toPromise().then((contract) => {
@@ -2843,7 +2843,7 @@ __webpack_require__.r(__webpack_exports__);
 class LenderService {
     constructor(http) {
         this.http = http;
-        this.baseUrl = 'http://localhost:5000/api/';
+        this.baseUrl = 'http://40.121.211.35:5000/api/';
     }
     updateLoanStatus(loanId) {
         return Object(tslib__WEBPACK_IMPORTED_MODULE_0__["__awaiter"])(this, void 0, void 0, function* () {

@@ -4203,7 +4203,7 @@
           _classCallCheck(this, BorrowService);
 
           this.http = http;
-          this.baseUrl = 'http://localhost:5000/api/';
+          this.baseUrl = 'http://40.121.211.35:5000/api/';
         }
 
         _createClass(BorrowService, [{
@@ -4741,7 +4741,7 @@
           _classCallCheck(this, LenderService);
 
           this.http = http;
-          this.baseUrl = 'http://localhost:5000/api/';
+          this.baseUrl = 'http://40.121.211.35:5000/api/';
         }
 
         _createClass(LenderService, [{

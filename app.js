@@ -19,6 +19,10 @@ app.get('/', (req,res) => {
 		res.sendFile(process.cwd()+"/UI/dist/loanwolfui/index.html")
 });
 
+app.get('/home', (req,res) => {
+	res.sendFile(process.cwd()+"/UI/dist/loanwolfui/index.html")
+});
+
 
 mongoose
 	.connect("mongodb://localhost:27017/users-data", { useNewUrlParser: true, useUnifiedTopology: true })
