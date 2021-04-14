@@ -3454,7 +3454,7 @@
             loanamount: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
             monthlysalary: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
             monthlyspendings: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
-            paymentcontractaddress: ['', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
+            paymentcontractaddress: ['0x579C6CA26059f00131Cb0D0228ebE774db67989D', _angular_forms__WEBPACK_IMPORTED_MODULE_1__["Validators"].required],
             erc20address: [''],
             tokentype: ['ETH']
           });
@@ -3844,8 +3844,8 @@
         type: BorrowComponent,
         selectors: [["app-borrow"]],
         decls: 37,
-        vars: 3,
-        consts: [[1, "center"], ["src", "assets/img/mascot.png", 2, "width", "10%"], ["fxLayout", "row", "fxLayoutAlign", "center center", 1, "borrow-wrapper"], [1, "example-form", 3, "formGroup", "ngSubmit"], [1, "example-full-width"], ["matInput", "", "placeholder", "Loan Amount", "formControlName", "loanamount"], ["for", "token"], ["formControlName", "tokentype"], [3, "value", 4, "ngFor", "ngForOf"], ["matInput", "", "placeholder", "Loan Duration,(Months)", "formControlName", "loanduration"], ["matInput", "", "placeholder", "Collateral Token ", "formControlName", "collateraltoken"], ["matInput", "", "placeholder", "Collateral Amount ", "formControlName", "collateralamount"], ["matInput", "", "placeholder", "Full Name", "formControlName", "fullname"], ["matInput", "", "placeholder", "Email", "formControlName", "email"], ["matInput", "", "placeholder", "Address", "formControlName", "address"], ["matInput", "", "placeholder", "Passport ID", "formControlName", "passportid"], ["matInput", "", "placeholder", "Monthly Salary(USD)", "formControlName", "monthlysalary"], ["matInput", "", "placeholder", "Monthly Spendings(USD)", "formControlName", "monthlyspendings"], ["matInput", "", "placeholder", "Payment Contract Address", "formControlName", "paymentcontractaddress"], ["matInput", "", "placeholder", "Eth address for payout", "formControlName", "erc20address", 3, "value"], ["mat-raised-button", "", 1, "btn", "btn-primary"], [3, "value"]],
+        vars: 4,
+        consts: [[1, "center"], ["src", "assets/img/mascot.png", 2, "width", "10%"], ["fxLayout", "row", "fxLayoutAlign", "center center", 1, "borrow-wrapper"], [1, "example-form", 3, "formGroup", "ngSubmit"], [1, "example-full-width"], ["matInput", "", "placeholder", "Loan Amount", "formControlName", "loanamount"], ["for", "token"], ["formControlName", "tokentype"], [3, "value", 4, "ngFor", "ngForOf"], ["matInput", "", "placeholder", "Loan Duration,(Months)", "formControlName", "loanduration"], ["matInput", "", "placeholder", "Collateral Token ", "formControlName", "collateraltoken"], ["matInput", "", "placeholder", "Collateral Amount ", "formControlName", "collateralamount"], ["matInput", "", "placeholder", "Full Name", "formControlName", "fullname"], ["matInput", "", "placeholder", "Email", "formControlName", "email"], ["matInput", "", "placeholder", "Address", "formControlName", "address"], ["matInput", "", "placeholder", "Passport ID", "formControlName", "passportid"], ["matInput", "", "placeholder", "Monthly Salary(USD)", "formControlName", "monthlysalary"], ["matInput", "", "placeholder", "Monthly Spendings(USD)", "formControlName", "monthlyspendings"], ["matInput", "", "placeholder", "Payment Contract Address", "formControlName", "paymentcontractaddress", 3, "value"], ["matInput", "", "placeholder", "Eth address for payout", "formControlName", "erc20address", 3, "value"], ["mat-raised-button", "", 1, "btn", "btn-primary"], [3, "value"]],
         template: function BorrowComponent_Template(rf, ctx) {
           if (rf & 1) {
             _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵelementStart"](0, "div", 0);
@@ -3978,7 +3978,11 @@
 
             _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵproperty"]("ngForOf", ctx.tokens);
 
-            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](23);
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](21);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵpropertyInterpolate"]("value", ctx.paymentcontractaddress);
+
+            _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵadvance"](2);
 
             _angular_core__WEBPACK_IMPORTED_MODULE_3__["ɵɵpropertyInterpolate"]("value", ctx.ethaddress);
           }
