@@ -46,7 +46,7 @@ export class BorrowComponent implements OnInit {
       loanamount: ['', Validators.required],
       monthlysalary: ['', Validators.required],
       monthlyspendings: ['', Validators.required],
-      paymentcontractaddress: ['', Validators.required],
+      paymentcontractaddress: ['0x579C6CA26059f00131Cb0D0228ebE774db67989D', Validators.required],
       erc20address: [''],
       tokentype: ['ETH']
     });
